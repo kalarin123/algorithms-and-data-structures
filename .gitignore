@@ -1,0 +1,25 @@
+# Среды разработки
+.idea/
+.vscode/
+*.code-workspace
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Временные файлы
+*.log
+*.tmp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+
+# C/C++
+*.o
+*.obj
+*.exe
+*.out
+build/
+cmake-build-*/
