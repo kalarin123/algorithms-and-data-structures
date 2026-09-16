@@ -1,20 +1,42 @@
-def CountSort(A):
-    count = [0] * 101
-
-    for value in A:
-        count[value] += 1
-
-    k = 0
-
-    for value in range(101):
-        while count[value] > 0:
-            A[k] = value
-            k += 1
-            count[value] -= 1
+import sys
 
 
-A = list(map(int, input().split()))
+def QuickSort(A, left, right):
+    i = left
+    j = right
+    pivot = A[(left + right) // 2]
 
-CountSort(A)
+    while i <= j:
+        while A[i] < pivot:
+            i += 1
 
-print(*A)
+        while A[j] > pivot:
+            j -= 1
+
+        if i <= j:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+            j -= 1
+
+    if left < j:
+        QuickSort(A, left, j)
+
+    if i < right:
+        QuickSort(A, i, right)
+
+
+def main():
+    sys.setrecursionlimit(300000)
+
+    data = list(map(int, sys.stdin.buffer.read().split()))
+    n = data[0]
+    A = data[1:1 + n]
+
+    if n > 0:
+        QuickSort(A, 0, n - 1)
+
+    print(*A)
+
+
+if __name__ == "__main__":
+    main()
