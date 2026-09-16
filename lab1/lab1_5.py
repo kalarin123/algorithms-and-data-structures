@@ -1,35 +1,50 @@
 import sys
 
 
-def QuickSort(A, left, right):
+def Merge(A, left, mid, right):
+    temp = []
     i = left
-    j = right
-    pivot = A[(left + right) // 2]
+    j = mid + 1
 
-    while i <= j:
-        while A[i] < pivot:
+    while i <= mid and j <= right:
+        if A[i] <= A[j]:
+            temp.append(A[i])
             i += 1
+        else:
+            temp.append(A[j])
+            j += 1
 
-        while A[j] > pivot:
-            j -= 1
+    while i <= mid:
+        temp.append(A[i])
+        i += 1
 
-        if i <= j:
-            A[i], A[j] = A[j], A[i]
-            i += 1
-            j -= 1
+    while j <= right:
+        temp.append(A[j])
+        j += 1
 
-    if left < j:
-        QuickSort(A, left, j)
-
-    if i < right:
-        QuickSort(A, i, right)
+    for k in range(len(temp)):
+        A[left + k] = temp[k]
 
 
-data = list(map(int, sys.stdin.read().split()))
-n = data[0]
-A = data[1:1 + n]
+def MergeSort(A, left, right):
+    if left >= right:
+        return
 
-if n > 0:
-    QuickSort(A, 0, n - 1)
+    mid = (left + right) // 2
 
-print(*A)
+    MergeSort(A, left, mid)
+    MergeSort(A, mid + 1, right)
+    Merge(A, left, mid, right)
+
+
+def main():
+    data = list(map(int, sys.stdin.buffer.read().split()))
+    n = data[0]
+    A = data[1:1 + n]
+
+    MergeSort(A, 0, n - 1)
+    print(*A)
+
+
+if __name__ == "__main__":
+    main()
