@@ -1,19 +1,24 @@
-def InsertionSort(A):
-    n = len(A)
+import sys
 
-    for i in range(1, n):
-        x = A[i]
+
+def InsertionSort(A):
+    for i in range(1, len(A)):
+        current = A[i]
         j = i - 1
 
-        while j >= 0 and A[j] > x:
+        while j >= 0 and A[j] > current:
             A[j + 1] = A[j]
             j -= 1
 
-        A[j + 1] = x
+        A[j + 1] = current
+
+    return A
 
 
-A = list(map(int, input().split()))
+def main():
+    numbers = list(map(int, sys.stdin.buffer.read().split()))
+    print(*InsertionSort(numbers))
 
-InsertionSort(A)
 
-print(*A)
+if __name__ == "__main__":
+    main()
