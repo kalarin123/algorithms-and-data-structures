@@ -1,21 +1,27 @@
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+import sys
 
 
-def DistanceSquared(point):
-    return point.x * point.x + point.y * point.y
+def CountSort(A):
+    count = [0] * 101
+
+    for value in A:
+        count[value] += 1
+
+    position = 0
+
+    for value in range(101):
+        while count[value] > 0:
+            A[position] = value
+            position += 1
+            count[value] -= 1
+
+    return A
 
 
-n = int(input())
-points = []
+def main():
+    numbers = list(map(int, sys.stdin.buffer.read().split()))
+    print(*CountSort(numbers))
 
-for _ in range(n):
-    x, y = map(int, input().split())
-    points.append(Point(x, y))
 
-points.sort(key=DistanceSquared)
-
-for point in points:
-    print(point.x, point.y)
+if __name__ == "__main__":
+    main()
